@@ -1,0 +1,113 @@
+body {
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  background-color: #f0f4f8;
+}
+
+h2, h3 {
+  color: #1a3c6d;
+}
+
+button {
+  padding: 8px 16px;
+  background-color: #1a3c6d;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #2a5a9b;
+}
+
+input, select {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 100%;
+  max-width: 300px;
+}
+
+.page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.student-container, .company-container, .admin-container {
+  width: 100%;
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  flex: 1;
+}
+
+.admin-container {
+  max-width: 1200px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th, td {
+  padding: 10px;
+  border: 1px solid #ccc;
+  text-align: left;
+}
+
+th {
+  background-color: #1a3c6d;
+  color: white;
+}
+
+tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+tr:hover {
+  background-color: #e6f0fa;
+}
+
+.history, .register-form {
+  margin-top: 20px;
+}
+
+.tab-container {
+  width: 100%;
+}
+
+.tab-header {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+}
+
+.tab-header button {
+  padding: 10px 20px;
+  margin-left: 10px;
+  background-color: #e6f0fa;
+  color: #1a3c6d;
+  border: 1px solid #1a3c6d;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.tab-header button.active {
+  background-color: #1a3c6d;
+  color: white;
+}
+
+.tab-content {
+  padding: 20px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}

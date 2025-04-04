@@ -1,0 +1,264 @@
+/* Áp dụng ảnh nền cho toàn bộ trang */
+body {
+  background-image: url('/images/wallpaperflare.com_wallpaper.jpg'); /* Đường dẫn tới ảnh */
+  background-size: cover; /* Đảm bảo ảnh phủ toàn bộ màn hình */
+  background-position: center; /* Căn giữa ảnh nền */
+  background-attachment: fixed; /* Ảnh nền cố định khi cuộn trang */
+  background-repeat: no-repeat; /* Không lặp lại ảnh */
+}
+.login-container, .register-container, .student-container, .company-container, .admin-container {
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.student-container, .company-container {
+  max-width: 1200px;
+}
+
+.admin-container {
+  max-width: 1200px;
+  background-color: #e6f0fa;
+}
+
+form div {
+  margin: 10px 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th, td {
+  padding: 10px;
+  border: 1px solid #ccc;
+  text-align: left;
+}
+
+th {
+  background-color: #1a3c6d;
+  color: white;
+}
+
+tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+tr:hover {
+  background-color: #e6f0fa;
+}
+
+.admin-section {
+  margin: 20px 0;
+}
+
+.history, .register-form {
+  margin-top: 20px;
+}
+
+button {
+  margin: 5px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #1a3c6d;
+  color: white;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+}
+
+.header-logo {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.header h1 {
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+.header-right button {
+  background-color: #ffffff;
+  color: #1a3c6d;
+  border: 1px solid #1a3c6d;
+}
+
+.header-right button:hover {
+  background-color: #e6f0fa;
+}
+
+.footer {
+  text-align: center;
+  padding: 10px;
+  background-color: #1a3c6d;
+  color: white;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+.auth-page {
+  display: flex;
+  background-image: url('/images/wallpaperflare.com_wallpaper.jpg'); /* Đường dẫn tới ảnh */
+  background-size: cover; /* Đảm bảo ảnh phủ toàn bộ màn hình */
+  background-position: center; /* Căn giữa ảnh nền */
+  background-attachment: fixed; /* Ảnh nền cố định khi cuộn trang */
+  background-repeat: no-repeat; /* Không lặp lại ảnh */
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f0f4f8;
+}
+
+.login-container, .register-container {
+  width: 100%;
+  max-width: 600px;
+  padding: 20px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+.form-group {
+  margin: 10px 0;
+}
+.form-group label {
+  text-align: left;
+  display: block;
+  margin-left: 150px;
+  margin-bottom: 5px;
+  color: #1a3c6d;
+  font-weight: bold;
+}
+.register-form {
+  max-width: 500px; /* Limit the form width for better readability */
+  margin: 0 auto; /* Center the form on the page */
+  padding: 20px; /* Reduced padding to avoid excessive space */
+  background-color: #1a3c6d; /* Match the background color to the existing theme */
+  border-radius: 10px; /* Rounded corners for a modern look */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  color: #fff; /* White text to contrast with the dark background */
+  display: flex; /* Use flexbox to center content */
+  flex-direction: column; /* Stack children vertically */
+  justify-content: center; /* Center content vertically */
+  min-height: 300px; /* Set a minimum height to ensure enough space for centering */
+}
+
+.register-form h3 {
+  text-align: center; /* Center the heading */
+  margin: 0 0 15px 0; /* Reduced margin to balance spacing */
+  font-size: 24px; /* Slightly larger heading */
+  color: #fff; /* White heading text */
+}
+
+.form-group1 {
+  margin: 10px 0; /* Reduced margin for tighter spacing between form elements */
+  display: flex; /* Use flexbox for better control over layout */
+  flex-direction: column; /* Stack label and input/select vertically */
+  align-items: center; /* Center the content */
+}
+
+.form-group1 label1 {
+  text-align: left; /* Align text to the left */
+  display: block; /* Ensure the label takes its own line */
+  margin-bottom: 8px; /* Space between label and input/select */
+  color: #fff; /* White text to match the theme */
+  font-weight: bold; /* Keep the bold style */
+  font-size: 16px; /* Slightly larger font for readability */
+  width: 100%; /* Ensure the label takes the full width of the container */
+  max-width: 400px; /* Limit the width to match the input/select */
+}
+
+.form-group1 input,
+.form-group1 select {
+  width: 100%; /* Full width of the container */
+  max-width: 400px; /* Limit the width for better control on larger screens */
+  padding: 10px; /* More padding for a comfortable input area */
+  border: 1px solid #ccc; /* Keep the border */
+  border-radius: 5px; /* Rounded corners */
+  font-size: 16px; /* Larger font for readability */
+  background-color: #fff; /* White background for inputs */
+  color: #333; /* Dark text for contrast */
+  box-sizing: border-box; /* Ensure padding doesn't affect the width */
+}
+
+.form-group1 select {
+  appearance: none; /* Remove default dropdown arrow for custom styling */
+  background-image: url('data:image/svg+xml;utf8,<svg fill="%23333" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>'); /* Custom dropdown arrow */
+  background-repeat: no-repeat;
+  background-position: right 10px center; /* Position the arrow */
+  background-size: 16px; /* Size of the arrow */
+}
+
+.register-form button {
+  display: block; /* Ensure the button takes its own line */
+  width: auto; /* Let the button size based on its content */
+  margin: 15px auto 0; /* Reduced top margin to balance spacing */
+  padding: 10px 20px; /* Match the top/bottom padding with input fields (10px), adjust left/right for shorter width */
+  background-color: #fff; /* White background to match the existing button */
+  color: #1a3c6d; /* Dark text to match the theme */
+  border: 1px solid #d1e0ff; /* Add a light border to match the "Đăng xuất" button */
+  border-radius: 5px; /* Rounded corners */
+  font-size: 16px; /* Match the font-size of the input fields for consistent height */
+  line-height: 1; /* Normalize line-height to prevent extra height */
+  font-weight: normal; /* Remove bold to match the "Đăng xuất" button */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+  box-sizing: border-box; /* Ensure padding doesn't affect the width */
+}
+
+.register-form button:hover {
+  background-color: #f0f0f0; /* Slightly darker on hover, matching the subtle effect */
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .register-form {
+    max-width: 90%; /* Reduce the form width on smaller screens */
+    padding: 15px; /* Slightly less padding for smaller screens */
+    min-height: 250px; /* Adjust min-height for smaller screens */
+  }
+
+  .form-group1 label1,
+  .form-group1 input,
+  .form-group1 select {
+    max-width: 100%; /* Full width on smaller screens */
+  }
+
+  .form-group1 label1 {
+    font-size: 14px; /* Slightly smaller font for labels */
+  }
+
+  .form-group1 input,
+  .form-group1 select {
+    font-size: 14px; /* Slightly smaller font for inputs */
+    padding: 8px; /* Slightly less padding */
+  }
+
+  .register-form button {
+    padding: 8px 16px; /* Adjust padding for smaller screens */
+    font-size: 14px; /* Match the font-size reduction of inputs */
+    margin: 10px auto 0; /* Adjust margin for smaller screens */
+  }
+}
+.form-group input, .form-group select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
