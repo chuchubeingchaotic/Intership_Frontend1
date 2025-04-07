@@ -5,6 +5,7 @@ import Footer from './Footer';
 import '../App.css';
 
 const StudentPage = () => {
+    const [activeTab, setActiveTab] = useState('dangKyThucTap'); // Tab mặc định là "Đăng ký thực tập"
     const [email, setEmail] = useState(localStorage.getItem('email') || '');
     const [dnId, setDnId] = useState('');
     const [doanhNghieps, setDoanhNghieps] = useState([]);
@@ -48,52 +49,102 @@ const StudentPage = () => {
         <div className="page">
             <Header />
             <div className="student-container">
-                <div className="register-form">
-                    <h3>Đăng ký thực tập</h3>
-                    <form onSubmit={handleRegister}>
-                        <div className="form-group">
-                            <label>Email</label>
-                            <input
-                                type="email"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                                required
-                            />
-                        </div>
-                        <div className="form-group">
-                            <label>Chọn Doanh Nghiệp</label>
-                            <select value={dnId} onChange={(e) => setDnId(e.target.value)} required>
-                                <option value="">Chọn doanh nghiệp</option>
-                                {doanhNghieps.map((dn) => (
-                                    <option key={dn.dnId} value={dn.dnId}>
-                                        {dn.tenDN}
-                                    </option>
-                                ))}
-                            </select>
-                        </div>
-                        <button type="submit">Đăng ký</button>
-                    </form>
-                </div>
-                <div className="history">
-                    <h3>Lịch sử đăng ký</h3>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Doanh Nghiệp</th>
-                                <th>Ngày Đăng ký</th>
-                                <th>Trạng Thái</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {dangKyThucTaps.map((dk) => (
-                                <tr key={dk.dkttId}>
-                                    <td>{dk.doanhNghiep?.tenDN}</td>
-                                    <td>{new Date(dk.ngayDangKy).toLocaleDateString()}</td>
-                                    <td>{dk.trangThai}</td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
+                <div className="tab-container">
+                    <div className="tab-header">
+                        <button
+                            className={activeTab === 'dangKyThucTap' ? 'active' : ''}
+                            onClick={() => setActiveTab('dangKyThucTap')}
+                        >
+                            Đăng ký thực tập
+                        </button>
+                        <button
+                            className={activeTab === 'lichSuDangKy' ? 'active' : ''}
+                            onClick={() => setActiveTab('lichSuDangKy')}
+                        >
+                            Lịch sử đăng ký
+                        </button>
+                    </div>
+                    <div className="tab-content">
+                        {activeTab === 'dangKyThucTap' && (
+                            <div className="student-section">
+                                <div className="register-form">
+                                    <h3>Đăng ký thực tập</h3>
+                                    <form onSubmit={handleRegister}>
+                                        <div className="form-group">
+                                            <label>Email</label>
+                                            <input
+                                                type="email"
+                                                value={email}
+                                                onChange={(e) => setEmail(e.target.value)}
+                                                required
+                                            />
+                                        </div>
+                                        <div className="form-group">
+                                            <label>Chọn Doanh Nghiệp</label>
+                                            <select value={dnId} onChange={(e) => setDnId(e.target.value)} required>
+                                                <option value="">Chọn doanh nghiệp</option>
+                                                {doanhNghieps.map((dn) => (
+                                                    <option key={dn.dnId} value={dn.dnId}>
+                                                        {dn.tenDN}
+                                                    </option>
+                                                ))}
+                                            </select>
+                                        </div>
+                                        <button type="submit">Đăng ký</button>
+                                    </form>
+                                </div>
+
+                                <div className="doanh-nghiep-list">
+                                    <h3>Danh sách Doanh Nghiệp</h3>
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>Tên Doanh Nghiệp</th>
+                                                <th>Địa Chỉ</th>
+                                                <th>Số Điện Thoại</th>
+                                                <th>Email</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {doanhNghieps.map((dn) => (
+                                                <tr key={dn.dnId}>
+                                                    <td>{dn.tenDN}</td>
+                                                    <td>{dn.diaChi}</td>
+                                                    <td>{dn.soDT}</td>
+                                                    <td>{dn.email}</td>
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        )}
+                        {activeTab === 'lichSuDangKy' && (
+                            <div className="student-section">
+                                <div className="history">
+                                    <h3>Lịch sử đăng ký</h3>
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>Doanh Nghiệp</th>
+                                                <th>Ngày Đăng ký</th>
+                                                <th>Trạng Thái</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {dangKyThucTaps.map((dk) => (
+                                                <tr key={dk.dkttId}>
+                                                    <td>{dk.doanhNghiep?.tenDN}</td>
+                                                    <td>{new Date(dk.ngayDangKy).toLocaleDateString()}</td>
+                                                    <td>{dk.trangThai}</td>
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        )}
+                    </div>
                 </div>
             </div>
             <Footer />
