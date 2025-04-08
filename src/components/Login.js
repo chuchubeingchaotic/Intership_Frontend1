@@ -47,14 +47,14 @@ const Login = () => {
                             required
                         />
                     </div>
-                    <div className="form-group">
+                    {/* <div className="form-group">
                         <label>Vai trò</label>
                         <select value={role} onChange={(e) => setRole(e.target.value)}>
                             <option value="SinhVien">Sinh viên</option>
                             <option value="DoanhNghiep">Doanh nghiệp</option>
                             <option value="Admin">Admin</option>
                         </select>
-                    </div>
+                    </div> */}
                     <button type="submit">Đăng nhập</button>
                     <p>
                         Chưa có tài khoản?{' '}
