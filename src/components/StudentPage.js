@@ -5,11 +5,13 @@ import Footer from './Footer';
 import '../App.css';
 
 const StudentPage = () => {
-    const [activeTab, setActiveTab] = useState('dangKyThucTap'); // Tab mặc định là "Đăng ký thực tập"
+    const [activeTab, setActiveTab] = useState('dangKyThucTap');
     const [email, setEmail] = useState(localStorage.getItem('email') || '');
     const [dnId, setDnId] = useState('');
+    const [vtId, setVtId] = useState(''); // Thêm state cho vtId
     const [doanhNghieps, setDoanhNghieps] = useState([]);
     const [dangKyThucTaps, setDangKyThucTaps] = useState([]);
+    const [expandedRow, setExpandedRow] = useState(null); // State để theo dõi hàng được mở rộng
 
     useEffect(() => {
         const fetchData = async () => {
@@ -18,7 +20,6 @@ const StudentPage = () => {
                 setDoanhNghieps(doanhNghiepData);
 
                 const dangKyData = await getDangKyThucTaps();
-                // Lọc các đăng ký của sinh viên hiện tại
                 const filteredDangKy = dangKyData.filter(
                     (dk) => dk.sinhVien?.email === localStorage.getItem('email')
                 );
@@ -33,7 +34,7 @@ const StudentPage = () => {
     const handleRegister = async (e) => {
         e.preventDefault();
         try {
-            await createDangKyThucTap({ email, dnId });
+            await createDangKyThucTap({ email, dnId, vtId }); 
             alert('Đăng ký thực tập thành công!');
             const dangKyData = await getDangKyThucTaps();
             const filteredDangKy = dangKyData.filter(
@@ -41,8 +42,12 @@ const StudentPage = () => {
             );
             setDangKyThucTaps(filteredDangKy);
         } catch (error) {
-            alert('Đăng ký thất bại: ' + (error.response?.data || error.message));
+            alert('Đăng ký thất bại: ' + JSON.stringify(error.response?.data || error.message));
         }
+    };
+
+    const toggleRow = (dnId) => {
+        setExpandedRow(expandedRow === dnId ? null : dnId);
     };
 
     return (
@@ -75,13 +80,20 @@ const StudentPage = () => {
                                             <input
                                                 type="email"
                                                 value={email}
-                                                onChange={(e) => setEmail(e.target.value)}
+                                                // onChange={(e) => setEmail(e.target.value)}
                                                 required
                                             />
                                         </div>
                                         <div className="form-group">
                                             <label>Chọn Doanh Nghiệp</label>
-                                            <select value={dnId} onChange={(e) => setDnId(e.target.value)} required>
+                                            <select
+                                                value={dnId}
+                                                onChange={(e) => {
+                                                    setDnId(e.target.value);
+                                                    setVtId(''); // Reset vtId khi thay đổi doanh nghiệp
+                                                }}
+                                                required
+                                            >
                                                 <option value="">Chọn doanh nghiệp</option>
                                                 {doanhNghieps.map((dn) => (
                                                     <option key={dn.dnId} value={dn.dnId}>
@@ -90,6 +102,27 @@ const StudentPage = () => {
                                                 ))}
                                             </select>
                                         </div>
+                                        {dnId && (
+                                            <div className="form-group">
+                                                <label>Chọn Vị trí Thực tập</label>
+                                                <select
+                                                    value={vtId}
+                                                    onChange={(e) => setVtId(e.target.value)}
+                                                >
+                                                    <option value="">Không chọn vị trí cụ thể</option>
+                                                    {doanhNghieps
+                                                        .find((dn) => dn.dnId === dnId)
+                                                        ?.viTriThucTaps
+                                                        ?.filter((vt) => vt.soLuong > 0) 
+                                                        .map((vt) => (
+                                                            <option key={vt.vtId} value={vt.vtId}>
+                                                                {vt.tenViTri} (Số lượng: {vt.soLuong})
+                                                            </option>
+                                                    ))}
+
+                                                </select>
+                                            </div>
+                                        )}
                                         <button type="submit">Đăng ký</button>
                                     </form>
                                 </div>
@@ -103,16 +136,53 @@ const StudentPage = () => {
                                                 <th>Địa Chỉ</th>
                                                 <th>Số Điện Thoại</th>
                                                 <th>Email</th>
+                                                <th>Hành động</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             {doanhNghieps.map((dn) => (
-                                                <tr key={dn.dnId}>
-                                                    <td>{dn.tenDN}</td>
-                                                    <td>{dn.diaChi}</td>
-                                                    <td>{dn.soDT}</td>
-                                                    <td>{dn.email}</td>
-                                                </tr>
+                                                <React.Fragment key={dn.dnId}>
+                                                    <tr>
+                                                        <td>{dn.tenDN}</td>
+                                                        <td>{dn.diaChi}</td>
+                                                        <td>{dn.soDT}</td>
+                                                        <td>{dn.email}</td>
+                                                        <td>
+                                                            {dn.viTriThucTaps?.length > 0 && (
+                                                                <button onClick={() => toggleRow(dn.dnId)}>
+                                                                    {expandedRow === dn.dnId ? 'Ẩn' : 'Xem vị trí thực tập'}
+                                                                </button>
+                                                            )}
+                                                        </td>
+                                                    </tr>
+                                                    {expandedRow === dn.dnId && dn.viTriThucTaps?.length > 0 && (
+                                                        <tr>
+                                                            <td colSpan="5">
+                                                                <div className="vi-tri-list">
+                                                                    <h4>Danh sách Vị trí Thực tập</h4>
+                                                                    <table>
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th>Tên Vị trí</th>
+                                                                                <th>Mô Tả</th>
+                                                                                <th>Số Lượng Tuyển</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            {dn.viTriThucTaps.map((vt) => (
+                                                                                <tr key={vt.vtId}>
+                                                                                    <td>{vt.tenViTri}</td>
+                                                                                    <td>{vt.moTa || 'Không có'}</td>
+                                                                                    <td>{vt.soLuong}</td>
+                                                                                </tr>
+                                                                            ))}
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    )}
+                                                </React.Fragment>
                                             ))}
                                         </tbody>
                                     </table>
@@ -127,6 +197,7 @@ const StudentPage = () => {
                                         <thead>
                                             <tr>
                                                 <th>Doanh Nghiệp</th>
+                                                <th>Vị trí Thực tập</th>
                                                 <th>Ngày Đăng ký</th>
                                                 <th>Trạng Thái</th>
                                             </tr>
@@ -135,6 +206,7 @@ const StudentPage = () => {
                                             {dangKyThucTaps.map((dk) => (
                                                 <tr key={dk.dkttId}>
                                                     <td>{dk.doanhNghiep?.tenDN}</td>
+                                                    <td>{dk.viTriThucTap?.tenViTri || 'Không chọn'}</td>
                                                     <td>{new Date(dk.ngayDangKy).toLocaleDateString()}</td>
                                                     <td>{dk.trangThai}</td>
                                                 </tr>

@@ -1,72 +1,82 @@
 import axios from 'axios';
 
-const API_URL = 'https://localhost:7162/api'; // Thay bằng URL backend của bạn
+const BASE_URL = 'https://localhost:7162';
 
-const api = axios.create({
-    baseURL: API_URL,
-});
-
-// Thêm token vào header cho các yêu cầu cần xác thực
-api.interceptors.request.use((config) => {
+const getAuthHeader = () => {
     const token = localStorage.getItem('token');
-    if (token) {
-        config.headers.Authorization = `Bearer ${token}`;
-    }
-    return config;
-});
-
-export const login = async (email, matKhau, role) => {
-    const response = await api.post('/Auth/Login', { email, matKhau, role });
-    return response.data;
+    return token ? { Authorization: `Bearer ${token}` } : {};
 };
 
-export const registerSinhVien = async (sinhVien) => {
-    const response = await api.post('/SinhVien', sinhVien);
-    return response.data;
-};
-
-export const registerDoanhNghiep = async (doanhNghiep) => {
-    const response = await api.post('/DoanhNghiep', doanhNghiep);
+export const login = async (loginData) => {
+    const response = await axios.post(`${BASE_URL}/api/Auth/Login`, loginData);
     return response.data;
 };
 
 export const getSinhViens = async () => {
-    const response = await api.get('/SinhVien');
+    const response = await axios.get(`${BASE_URL}/api/SinhVien`, { headers: getAuthHeader() });
     return response.data;
 };
 
 export const deleteSinhVien = async (id) => {
-    await api.delete(`/SinhVien/${id}`);
+    await axios.delete(`${BASE_URL}/api/SinhVien/${id}`, { headers: getAuthHeader() });
 };
 
 export const getDoanhNghieps = async () => {
-    const response = await api.get('/DoanhNghiep');
+    const response = await axios.get(`${BASE_URL}/api/DoanhNghiep`, { headers: getAuthHeader() });
     return response.data;
 };
 
 export const getDoanhNghiepsForDangKy = async () => {
-    const response = await api.get('/DangKyThucTap/doanh-nghieps');
+    const response = await axios.get(`${BASE_URL}/api/DangKyThucTap/doanh-nghieps`);
     return response.data;
 };
 
 export const deleteDoanhNghiep = async (id) => {
-    await api.delete(`/DoanhNghiep/${id}`);
+    await axios.delete(`${BASE_URL}/api/DoanhNghiep/${id}`, { headers: getAuthHeader() });
 };
 
 export const getDangKyThucTaps = async () => {
-    const response = await api.get('/DangKyThucTap');
+    const response = await axios.get(`${BASE_URL}/api/DangKyThucTap`, { headers: getAuthHeader() });
     return response.data;
 };
 
-export const createDangKyThucTap = async (dangKyThucTap) => {
-    const response = await api.post('/DangKyThucTap', dangKyThucTap);
-    return response.data;
-};
-
-export const updateDangKyThucTap = async (id, trangThai) => {
-    await api.put(`/DangKyThucTap/${id}`, { trangThai });
+export const createDangKyThucTap = async (dangKyData) => {
+    await axios.post(`${BASE_URL}/api/DangKyThucTap`, dangKyData, { headers: getAuthHeader() });
 };
 
 export const deleteDangKyThucTap = async (id) => {
-    await api.delete(`/DangKyThucTap/${id}`);
+    await axios.delete(`${BASE_URL}/api/DangKyThucTap/${id}`, { headers: getAuthHeader() });
+};
+
+export const createSinhVien = async (sinhVienData) => {
+    await axios.post(`${BASE_URL}/api/SinhVien`, sinhVienData);
+};
+
+export const createDoanhNghiep = async (doanhNghiepData) => {
+    await axios.post(`${BASE_URL}/api/DoanhNghiep`, doanhNghiepData);
+};
+
+export const getViTriThucTaps = async () => {
+    const response = await axios.get(`${BASE_URL}/api/ViTriThucTap`, { headers: getAuthHeader() });
+    return response.data;
+};
+
+export const createViTriThucTap = async (viTriData) => {
+    await axios.post(`${BASE_URL}/api/ViTriThucTap`, viTriData, { headers: getAuthHeader() });
+};
+
+export const updateViTriThucTap = async (id, viTriData) => {
+    await axios.put(`${BASE_URL}/api/ViTriThucTap/${id}`, viTriData, { headers: getAuthHeader() });
+};
+
+export const deleteViTriThucTap = async (id) => {
+    await axios.delete(`${BASE_URL}/api/ViTriThucTap/${id}`, { headers: getAuthHeader() });
+};
+
+export const updateTrangThaiDangKy = async (dkttId, trangThai) => {
+    await axios.put(
+        `${BASE_URL}/api/DangKyThucTap/${dkttId}/status`,
+        { trangThai },
+        { headers: getAuthHeader() }
+    );
 };

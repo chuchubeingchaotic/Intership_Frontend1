@@ -1,33 +1,27 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
-import Login from './components/Login';
-import Register from './components/Register';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import LoginPage from './components/LoginPage'; 
+import RegisterStudentPage from './components/RegisterStudentPage';
+import RegisterCompanyPage from './components/RegisterCompanyPage';
 import StudentPage from './components/StudentPage';
 import CompanyPage from './components/CompanyPage';
 import AdminPage from './components/AdminPage';
 import './App.css';
 
 const App = () => {
-    const location = useLocation();
-    const showHeaderFooter = !['/', '/register'].includes(location.pathname);
-
     return (
-        <div className="app">
+        <Router>
             <Routes>
-                <Route path="/" element={<Login />} />
-                <Route path="/register" element={<Register />} />
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="/register-student" element={<RegisterStudentPage />} />
+                <Route path="/register-company" element={<RegisterCompanyPage />} />
                 <Route path="/student" element={<StudentPage />} />
                 <Route path="/company" element={<CompanyPage />} />
                 <Route path="/admin" element={<AdminPage />} />
+                <Route path="/" element={<LoginPage />} />
             </Routes>
-        </div>
+        </Router>
     );
 };
 
-const AppWrapper = () => (
-    <Router>
-        <App />
-    </Router>
-);
-
-export default AppWrapper;
+export default App;

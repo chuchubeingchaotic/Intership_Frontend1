@@ -144,6 +144,7 @@ const AdminPage = () => {
                                         <tr>
                                             <th>Sinh Viên</th>
                                             <th>Doanh Nghiệp</th>
+                                            <th>Vị trí Thực tập</th> {/* Thêm cột Vị trí Thực tập */}
                                             <th>Ngày Đăng ký</th>
                                             <th>Trạng Thái</th>
                                             <th>Hành Động</th>
@@ -154,6 +155,7 @@ const AdminPage = () => {
                                             <tr key={dk.dkttId}>
                                                 <td>{dk.sinhVien?.hoTen}</td>
                                                 <td>{dk.doanhNghiep?.tenDN}</td>
+                                                <td>{dk.viTriThucTap?.tenViTri || 'Không chọn'}</td> {/* Hiển thị tên vị trí */}
                                                 <td>{new Date(dk.ngayDangKy).toLocaleDateString()}</td>
                                                 <td>{dk.trangThai}</td>
                                                 <td>
