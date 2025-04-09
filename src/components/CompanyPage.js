@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getDangKyThucTaps, getViTriThucTaps, createViTriThucTap, deleteViTriThucTap } from '../services/api';
+import { getDangKyThucTaps, getViTriThucTaps, createViTriThucTap } from '../services/api';
 import Header from './Header';
 import Footer from './Footer';
 import '../App.css';
@@ -78,21 +78,6 @@ const CompanyPage = () => {
             setLoading(false);
         }
     };
-
-    const handleDeleteViTri = async (vtId) => {
-        if (!window.confirm('Bạn có chắc chắn muốn xóa vị trí này không?')) return;
-    
-        try {
-            setLoading(true);
-            await deleteViTriThucTap(vtId);
-            alert('Xóa vị trí thành công!');
-            await fetchViTriThucTaps(); // Refresh lại danh sách
-        } catch (error) {
-            alert('Xóa vị trí thất bại: ' + (error.response?.data || error.message));
-        } finally {
-            setLoading(false);
-        }
-    };
     
     const handleUpdateTrangThai = async (id, trangThai) => {
         try {
@@ -109,15 +94,6 @@ const CompanyPage = () => {
             }
     
             await updateTrangThaiDangKy(id, trangThai);
-    
-            // Sau khi duyệt, giảm số lượng trong danh sách local (nếu cần)
-            if (trangThai === 'Đã duyệt') {
-                setViTriThucTaps((prev) =>
-                    prev.map((vt) =>
-                        vt.vtId === viTri.vtId ? { ...vt, soLuong: vt.soLuong - 1 } : vt
-                    )
-                );
-            }
     
             // Làm mới danh sách đăng ký
             const updated = await getDangKyThucTaps();
@@ -152,19 +128,19 @@ const CompanyPage = () => {
                     <div className="tab-content">
                     {activeTab === 'danhSachSinhVien' && (
                             <div className="company-section">
-                                <h3>Danh sách Sinh viên Đăng ký</h3>
+                                <h3>Danh sách sinh viên đăng ký</h3>
                                 <table>
                                     <thead>
                                         <tr>
-                                            <th>Họ Tên</th>
-                                            <th>Mã Sinh Viên</th>
+                                            <th>Họ tên</th>
+                                            <th>Mã sinh viên</th>
                                             <th>Lớp</th>
                                             <th>Email</th>
-                                            <th>Số Điện Thoại</th>
+                                            <th>Số điện thoại</th>
                                             <th>GPA</th>
-                                            <th>Vị trí Thực tập</th>
-                                            <th>Ngày Đăng ký</th>
-                                            <th>Trạng Thái</th>
+                                            <th>Vị trí thực tập</th>
+                                            <th>Ngày đăng ký</th>
+                                            <th>Trạng thái</th>
                                         </tr>
                                     </thead>
                                     <tbody>

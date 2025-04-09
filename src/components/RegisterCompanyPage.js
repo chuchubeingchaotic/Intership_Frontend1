@@ -18,7 +18,7 @@ const RegisterCompanyPage = () => {
             alert('Đăng ký doanh nghiệp thành công!');
             navigate('/');
         } catch (error) {
-            alert('Đăng ký thất bại: ' + (error.response?.data || error.message));
+            alert('Đăng ký thất bại: ' + JSON.stringify(error.response?.data || error.message));
         }
     };
 

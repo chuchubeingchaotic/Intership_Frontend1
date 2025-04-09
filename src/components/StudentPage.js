@@ -128,13 +128,13 @@ const StudentPage = () => {
                                 </div>
 
                                 <div className="doanh-nghiep-list">
-                                    <h3>Danh sách Doanh Nghiệp</h3>
+                                    <h3>Danh sách doanh nghiệp</h3>
                                     <table>
                                         <thead>
                                             <tr>
-                                                <th>Tên Doanh Nghiệp</th>
-                                                <th>Địa Chỉ</th>
-                                                <th>Số Điện Thoại</th>
+                                                <th>Tên doanh nghiệp</th>
+                                                <th>Địa chỉ</th>
+                                                <th>Số điện thoại</th>
                                                 <th>Email</th>
                                                 <th>Hành động</th>
                                             </tr>
@@ -159,13 +159,13 @@ const StudentPage = () => {
                                                         <tr>
                                                             <td colSpan="5">
                                                                 <div className="vi-tri-list">
-                                                                    <h4>Danh sách Vị trí Thực tập</h4>
+                                                                    <h4>Danh sách vị trí thực tập</h4>
                                                                     <table>
                                                                         <thead>
                                                                             <tr>
-                                                                                <th>Tên Vị trí</th>
-                                                                                <th>Mô Tả</th>
-                                                                                <th>Số Lượng Tuyển</th>
+                                                                                <th>Tên vị trí</th>
+                                                                                <th>Mô tả</th>
+                                                                                <th>Số lượng tuyển</th>
                                                                             </tr>
                                                                         </thead>
                                                                         <tbody>
@@ -196,10 +196,10 @@ const StudentPage = () => {
                                     <table>
                                         <thead>
                                             <tr>
-                                                <th>Doanh Nghiệp</th>
-                                                <th>Vị trí Thực tập</th>
-                                                <th>Ngày Đăng ký</th>
-                                                <th>Trạng Thái</th>
+                                                <th>Doanh nghiệp</th>
+                                                <th>Vị trí thực tập</th>
+                                                <th>Ngày đăng ký</th>
+                                                <th>Trạng thái</th>
                                             </tr>
                                         </thead>
                                         <tbody>

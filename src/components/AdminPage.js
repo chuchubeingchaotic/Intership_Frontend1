@@ -118,9 +118,9 @@ const AdminPage = () => {
                                 <table>
                                     <thead>
                                         <tr>
-                                            <th>Tên Doanh Nghiệp</th>
+                                            <th>Tên doanh nghiệp</th>
                                             <th>Email</th>
-                                            <th>Hành Động</th>
+                                            <th>Hành động</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -142,12 +142,12 @@ const AdminPage = () => {
                                 <table>
                                     <thead>
                                         <tr>
-                                            <th>Sinh Viên</th>
-                                            <th>Doanh Nghiệp</th>
-                                            <th>Vị trí Thực tập</th> {/* Thêm cột Vị trí Thực tập */}
-                                            <th>Ngày Đăng ký</th>
-                                            <th>Trạng Thái</th>
-                                            <th>Hành Động</th>
+                                            <th>Sinh viên</th>
+                                            <th>Doanh nghiệp</th>
+                                            <th>Vị trí thực tập</th> {/* Thêm cột Vị trí Thực tập */}
+                                            <th>Ngày đăng ký</th>
+                                            <th>Trạng thái</th>
+                                            <th>Hành động</th>
                                         </tr>
                                     </thead>
                                     <tbody>

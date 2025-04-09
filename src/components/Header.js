@@ -2,9 +2,6 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../App.css';
 
-// Thay thế bằng link ảnh logo của bạn
-const logoUrl = 'https://via.placeholder.com/40'; // Placeholder logo
-
 const Header = () => {
     const navigate = useNavigate();
 
